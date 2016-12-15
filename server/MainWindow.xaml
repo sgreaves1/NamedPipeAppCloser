@@ -14,7 +14,7 @@
 
                 </ItemsControl>
                 
-                <Button Content="+" Command="{Binding Path=AddClientcommand}" ToolTip="Add Client"/>
+                <Button Content="+" Command="{Binding Path=AddClientCommand}" ToolTip="Add Client"/>
             </StackPanel>
             
 

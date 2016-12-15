@@ -11,13 +11,14 @@ namespace server.Model
     {
         private Process _clientApp;
 
-        ClientModel()
+        public ClientModel()
         {
             _clientApp = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
 
             startInfo.FileName = "C:\\own stuff\\closeappwithpipe\\server\\Client\\bin\\Debug\\Client.exe";
 
+            _clientApp.StartInfo = startInfo;
             _clientApp.Start();
         }
     }
