@@ -1,0 +1,13 @@
+C:\own stuff\closeappwithpipe\server\Client\bin\Debug\Client.exe.config
+C:\own stuff\closeappwithpipe\server\Client\bin\Debug\Client.exe
+C:\own stuff\closeappwithpipe\server\Client\bin\Debug\Client.pdb
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\MainWindow.g.cs
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\App.g.cs
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client_MarkupCompile.cache
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client_MarkupCompile.lref
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\MainWindow.baml
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client.g.resources
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client.Properties.Resources.resources
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client.csproj.GenerateResource.Cache
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client.exe
+C:\own stuff\closeappwithpipe\server\Client\obj\Debug\Client.pdb
