@@ -9,10 +9,14 @@
     <StackPanel>
         <Label Content="Server"/>
         <StackPanel Orientation="Horizontal">
-            
-            <ItemsControl>
+            <StackPanel Orientation="Horizontal">
+                <ItemsControl>
+
+                </ItemsControl>
                 
-            </ItemsControl>
+                <Button Content="+" Command="{Binding Path=AddClientcommand}" ToolTip="Add Client"/>
+            </StackPanel>
+            
 
             <TextBlock Name="TextBlock1"/>
         </StackPanel>

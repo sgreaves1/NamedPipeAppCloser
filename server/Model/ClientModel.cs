@@ -16,7 +16,7 @@ namespace server.Model
             _clientApp = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
 
-            startInfo.FileName = "C:\\own stuff\\\closeappwithpipe\\server\\Client\\bin\\Debug\\Client.exe";
+            startInfo.FileName = "C:\\own stuff\\closeappwithpipe\\server\\Client\\bin\\Debug\\Client.exe";
 
             _clientApp.Start();
         }
