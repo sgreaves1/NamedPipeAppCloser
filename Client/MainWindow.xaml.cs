@@ -27,7 +27,6 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
-            StartClients();
         }
 
         private static void StartClients()
