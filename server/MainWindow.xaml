@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:server"
         xmlns:myLibrary="clr-namespace:MyLibrary;assembly=MyLibrary"
+        xmlns:converter="clr-namespace:server.Converter"
         mc:Ignorable="d"
         Title="Server" Height="350" Width="525">
+    <Window.Resources>
+        <converter:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,17 +27,17 @@
         <Label Content="Server"/>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <myLibrary:SelectPanelUc ItemsSource="{Binding Path=Models}" Width="100" SelectedItem="{Binding Path=SelectedItem}"/>
+                <myLibrary:SelectPanelUc ItemsSource="{Binding Path=Models}" Width="100" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"/>
                 
                 <Button Content="+" Command="{Binding Path=AddClientCommand}" ToolTip="Add Client"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
-        
+
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBox Height="100"/>
-            <Button Content="Send"/>
-            <Button Content="Shutdown"/>
+            <TextBox Height="100" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+            <Button Content="Send" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+            <Button Content="Shutdown" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
         </StackPanel>
         
 
