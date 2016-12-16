@@ -4,21 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:server"
+        xmlns:myLibrary="clr-namespace:MyLibrary;assembly=MyLibrary"
         mc:Ignorable="d"
         Title="Server" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
     <StackPanel>
         <Label Content="Server"/>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <ItemsControl ItemsSource="{Binding Path=Models}" DisplayMemberPath="ProcessId" Width="100">
-
-                </ItemsControl>
+                <myLibrary:SelectPanelUc ItemsSource="{Binding Path=Models}" Width="100" SelectedItem="{Binding Path=SelectedItem}"/>
                 
                 <Button Content="+" Command="{Binding Path=AddClientCommand}" ToolTip="Add Client"/>
             </StackPanel>
-            
-
-            <TextBlock Name="TextBlock1"/>
         </StackPanel>
     </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBox Height="100"/>
+            <Button Content="Send"/>
+            <Button Content="Shutdown"/>
+        </StackPanel>
+        
+
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Aqua" CornerRadius="5">
+            <TextBlock  Name="TextBlock1"/>
+        </Border>
+        
+        
+    </Grid>
 </Window>

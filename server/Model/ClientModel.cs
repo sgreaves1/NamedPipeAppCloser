@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyLibrary.SelectPanel;
 
 namespace server.Model
 {
-    public class ClientModel : BaseModel
+    public class ClientModel : BaseModel, IPanelItem
     {
         private Process _clientApp;
 
@@ -21,7 +22,12 @@ namespace server.Model
             _clientApp.StartInfo = startInfo;
             _clientApp.Start();
         }
-
-        public int ProcessId => _clientApp?.Id ?? 0;
+        
+        public string Name
+        {
+            get { return _clientApp?.Id.ToString() ?? ""; }
+            set { }
+        }
+        public bool IsSelected { get; set; }
     }
 }
