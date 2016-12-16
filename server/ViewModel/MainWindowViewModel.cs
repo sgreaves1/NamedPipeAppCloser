@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,12 +10,24 @@ using server.Model;
 
 namespace server.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
+        private ObservableCollection<ClientModel> _models = new ObservableCollection<ClientModel>();
+
         public MainWindowViewModel()
         {
             InitCommands();
         }
+
+        public ObservableCollection<ClientModel> Models
+        {
+            get {  return _models; }
+            set
+            {
+                _models = value;
+                OnPropertyChanged();
+            }
+        } 
 
         public ICommand AddClientCommand { get; set; }
 
@@ -25,7 +38,7 @@ namespace server.ViewModel
 
         private void ExecuteAddClientCommand()
         {
-            ClientModel model = new ClientModel();
+            Models.Add(new ClientModel());
         }
     }
 }

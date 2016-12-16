@@ -21,5 +21,7 @@ namespace server.Model
             _clientApp.StartInfo = startInfo;
             _clientApp.Start();
         }
+
+        public int ProcessId => _clientApp?.Id ?? 0;
     }
 }
