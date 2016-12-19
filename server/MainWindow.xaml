@@ -42,7 +42,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Clear" Margin="5,0,5,5" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+                <Button Content="Clear" Margin="5,0,5,5" Command="{Binding Path=ClearCommand}" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
 
                 <Button Content="Send" Margin="5,0,5,5" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
             </StackPanel>

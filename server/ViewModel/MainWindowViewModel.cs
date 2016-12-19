@@ -56,10 +56,25 @@ namespace server.ViewModel
         }
 
         public ICommand AddClientCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
 
         private void InitCommands()
         {
             AddClientCommand = new RelayCommand(ExecuteAddClientCommand);
+            ClearCommand = new RelayCommand(ExecuteClearCommand, CanExecuteClearCommand);
+        }
+
+        private bool CanExecuteClearCommand()
+        {
+            if (TextToSend != "")
+                return true;
+
+            return false;
+        }
+
+        private void ExecuteClearCommand()
+        {
+            TextToSend = "";
         }
 
         private void ExecuteAddClientCommand()
