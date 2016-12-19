@@ -63,8 +63,8 @@
     <Compile Include="Converter\NullVisibilityConverter.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\InformationReadyEventArgs.cs" />
     <Compile Include="PipeServer\NamedPipeServer.cs" />
-    <Compile Include="PipeServer\NamedPipeServerCollection.cs" />
     <Compile Include="ReadFileToStream.cs" />
     <Compile Include="PipeServer\StreamString.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

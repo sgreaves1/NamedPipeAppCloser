@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyLibrary.SelectPanel;
+using server.PipeServer;
 
 namespace server.Model
 {
@@ -12,7 +13,11 @@ namespace server.Model
     {
         private Process _clientApp;
 
-        public ClientModel()
+        private NamedPipeServer _pipeServer;
+
+        public EventHandler InformationReady;
+        
+        public void StartClient()
         {
             _clientApp = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -21,8 +26,17 @@ namespace server.Model
 
             _clientApp.StartInfo = startInfo;
             _clientApp.Start();
+
+            _pipeServer = new NamedPipeServer((int)_clientApp?.Id);
+            _pipeServer.InformationReady += PipeServerOnInformationReady;
+            _pipeServer.CreatePipe();
         }
-        
+
+        private void PipeServerOnInformationReady(object sender, EventArgs eventArgs)
+        {
+            InformationReady?.Invoke(this, eventArgs);
+        }
+
         public string Name
         {
             get { return _clientApp?.Id.ToString() ?? ""; }

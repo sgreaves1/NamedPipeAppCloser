@@ -6,7 +6,7 @@
         xmlns:myLibrary="clr-namespace:MyLibrary;assembly=MyLibrary"
         xmlns:converter="clr-namespace:server.Converter"
         mc:Ignorable="d"
-        Title="Server" Height="450" Width="525">
+        Title="Server" Height="550" Width="725">
     <Window.Resources>
         <converter:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
     </Window.Resources>
@@ -56,7 +56,7 @@
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Aqua" CornerRadius="5">
             <StackPanel>
                 <Label Content="Information:" HorizontalAlignment="Center"/>
-                <TextBlock  Name="TextBlock1"/>
+                <TextBlock  Name="TextBlock1" Text="{Binding Path=Information}"/>
             </StackPanel>
         </Border>
         

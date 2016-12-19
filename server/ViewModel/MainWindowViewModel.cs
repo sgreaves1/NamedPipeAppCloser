@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MyLibrary.SelectPanel;
 using server.Command;
@@ -11,6 +12,7 @@ namespace server.ViewModel
         private ObservableCollection<IPanelItem> _models = new ObservableCollection<IPanelItem>();
         private IPanelItem _selectedItem;
         private string _textToSend;
+        private string _information;
 
         public MainWindowViewModel()
         {
@@ -49,6 +51,16 @@ namespace server.ViewModel
             }
         }
 
+        public string Information
+        {
+            get { return _information; }
+            set
+            {
+                _information = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand AddClientCommand { get; set; }
         public ICommand ClearCommand { get; set; }
 
@@ -73,7 +85,15 @@ namespace server.ViewModel
 
         private void ExecuteAddClientCommand()
         {
-            Models.Add(new ClientModel());
+            ClientModel client = new ClientModel();
+            client.InformationReady += InformationReady;
+            client.StartClient();
+            Models.Add(client);
+        }
+
+        private void InformationReady(object sender, EventArgs eventArgs)
+        {
+            Information += ((InformationReadyEventArgs) eventArgs).Message;
         }
     }
 }

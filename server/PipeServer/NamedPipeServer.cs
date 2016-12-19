@@ -2,61 +2,56 @@
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
+using server.Model;
 
 namespace server.PipeServer
 {
     public class NamedPipeServer
     {
-        private static int numThreads = 0;
+        private static int _processId;
+
+        public static event EventHandler InformationReady;
 
         public NamedPipeServer(int processId)
         {
+            _processId = processId;
+        }
+
+        public void CreatePipe()
+        {
+            InformationReady?.Invoke(this, new InformationReadyEventArgs() { Message = " Named Pipe Server "+ "Pipe" + _processId + " \n" });
+            InformationReady?.Invoke(this, new InformationReadyEventArgs() { Message = " Pipe" + _processId + " Waiting for client connect...\n" });
+
             Thread server;
 
-            numThreads = processId;
-
-            //TextBlock1.Text += "*** Named pipe server stream with impersonation example ***\n";
-            //TextBlock1.Text += "Waiting for client connect...\n";
-            
             server = new Thread(ServerThread);
             server.Start();
-            
+
             Thread.Sleep(250);
-            
-            if (server != null)
+
+            if (server.Join(250))
             {
-                if (server.Join(250))
-                {
-                    //TextBlock1.Text += "Server thread" + servers[j].ManagedThreadId + " finished \n";
-                    server = null;
-                }
+                InformationReady?.Invoke(this, new InformationReadyEventArgs() { Message = " Pipe" + _processId + " finished \n" });
+
+                server = null;
             }
         }
 
         private static void ServerThread(object data)
         {
-            NamedPipeServerStream pipeServer = new NamedPipeServerStream("Pipe" + numThreads, PipeDirection.Out, 1);
+            NamedPipeServerStream pipeServer = new NamedPipeServerStream("Pipe" + _processId, PipeDirection.Out, 1);
 
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
             pipeServer.WaitForConnection();
 
-            Console.WriteLine("Client connected on thread[{0}].", threadId);
-
+            InformationReady?.Invoke(null, new InformationReadyEventArgs() { Message = " Pipe" + _processId + " Client Connected\n" });
+            
             try
             {
                 StreamString ss = new StreamString(pipeServer);
 
                 ss.WriteString("I am the one true server!");
-                string filename = ss.ReadString();
-
-                // Read in the contents of the file while impersonating the client.
-                ReadFileToStream fileReader = new ReadFileToStream(ss, filename);
-
-                // Display the name of the user we are impersonating.
-                Console.WriteLine("Reading file: {0} on thread[{1}] as user: {2}.",
-                    filename, threadId, pipeServer.GetImpersonationUserName());
-                pipeServer.RunAsClient(fileReader.Start);
             }
             catch (IOException e)
             {
