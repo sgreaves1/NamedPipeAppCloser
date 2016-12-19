@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="Client" Height="350" Width="525">
     <Grid>
+        <StackPanel>
+            <Label Content="Output" HorizontalAlignment="Center"/>
+            <Border BorderThickness="1" BorderBrush="Aqua" CornerRadius="10" Height="200">
+                <TextBox Text="{Binding Path=Output}"/>
+            </Border>
+        </StackPanel>
         
     </Grid>
 </Window>
