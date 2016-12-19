@@ -7,42 +7,35 @@ namespace server.PipeServer
 {
     public class NamedPipeServer
     {
-        private static int numThreads = 4;
+        private static int numThreads = 0;
 
-        void CreatePipe()
+        public NamedPipeServer(int processId)
         {
-            int i;
-            Thread[] servers = new Thread[numThreads];
+            Thread server;
+
+            numThreads = processId;
 
             //TextBlock1.Text += "*** Named pipe server stream with impersonation example ***\n";
             //TextBlock1.Text += "Waiting for client connect...\n";
-
-            for (i = 0; i < numThreads; i++)
-            {
-                servers[i] = new Thread(ServerThread);
-                servers[i].Start();
-            }
+            
+            server = new Thread(ServerThread);
+            server.Start();
+            
             Thread.Sleep(250);
-            while (i < 0)
+            
+            if (server != null)
             {
-                for (int j = 0; j < numThreads; j++)
+                if (server.Join(250))
                 {
-                    if (servers[j] != null)
-                    {
-                        if (servers[j].Join(250))
-                        {
-                            //TextBlock1.Text += "Server thread" + servers[j].ManagedThreadId + " finished \n";
-                            servers[j] = null;
-                            i--;
-                        }
-                    }
+                    //TextBlock1.Text += "Server thread" + servers[j].ManagedThreadId + " finished \n";
+                    server = null;
                 }
             }
         }
 
         private static void ServerThread(object data)
         {
-            NamedPipeServerStream pipeServer = new NamedPipeServerStream("testPipe", PipeDirection.Out, numThreads);
+            NamedPipeServerStream pipeServer = new NamedPipeServerStream("Pipe" + numThreads, PipeDirection.Out, 1);
 
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
