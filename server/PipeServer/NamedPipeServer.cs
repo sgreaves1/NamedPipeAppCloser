@@ -10,7 +10,7 @@ namespace server.PipeServer
     {
         private static int _processId;
 
-        public static event EventHandler InformationReady;
+        public event EventHandler InformationReady;
 
         public NamedPipeServer(int processId)
         {
@@ -37,7 +37,7 @@ namespace server.PipeServer
             }
         }
 
-        private static void ServerThread(object data)
+        private void ServerThread(object data)
         {
             NamedPipeServerStream pipeServer = new NamedPipeServerStream("Pipe" + _processId, PipeDirection.Out, 1);
 
