@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:server"
         xmlns:myLibrary="clr-namespace:MyLibrary;assembly=MyLibrary"
         xmlns:converter="clr-namespace:server.Converter"
         mc:Ignorable="d"
-        Title="Server" Height="350" Width="525">
+        Title="Server" Height="450" Width="525">
     <Window.Resources>
         <converter:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
     </Window.Resources>
@@ -26,23 +25,39 @@
     <StackPanel>
         <Label Content="Server"/>
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <myLibrary:SelectPanelUc ItemsSource="{Binding Path=Models}" Width="100" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"/>
+                <myLibrary:SelectPanelUc ItemsSource="{Binding Path=Models}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"/>
                 
-                <Button Content="+" Command="{Binding Path=AddClientCommand}" ToolTip="Add Client"/>
-            </StackPanel>
+                <Button Content="+" Command="{Binding Path=AddClientCommand}" ToolTip="Add Client" Width="40"/>
         </StackPanel>
     </StackPanel>
 
+
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBox Height="100" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
-            <Button Content="Send" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
-            <Button Content="Shutdown" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+
+            <StackPanel>
+                <Label Content="Enter Text To Send!" HorizontalAlignment="Center" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+                <Border Margin="10" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}">
+                    <TextBox Height="100" Text="{Binding Path=TextToSend}" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+                </Border>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Clear" Margin="5,0,5,5" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+
+                <Button Content="Send" Margin="5,0,5,5" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+            </StackPanel>
+            
+            <Button Content="Shutdown" Width="150" Visibility="{Binding Path=SelectedItem, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=SelectedItem}"/>
+
+
         </StackPanel>
-        
+
 
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Aqua" CornerRadius="5">
-            <TextBlock  Name="TextBlock1"/>
+            <StackPanel>
+                <Label Content="Information:" HorizontalAlignment="Center"/>
+                <TextBlock  Name="TextBlock1"/>
+            </StackPanel>
         </Border>
         
         

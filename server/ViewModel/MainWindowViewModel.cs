@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,10 +16,13 @@ namespace server.ViewModel
     {
         private ObservableCollection<IPanelItem> _models = new ObservableCollection<IPanelItem>();
         private IPanelItem _selectedItem;
+        private string _textToSend;
 
         public MainWindowViewModel()
         {
             InitCommands();
+
+            TextToSend = "Text to send.";
         }
 
         public ObservableCollection<IPanelItem> Models
@@ -37,6 +41,16 @@ namespace server.ViewModel
             set
             {
                 _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string TextToSend
+        {
+            get { return _textToSend; }
+            set
+            {
+                _textToSend = value;
                 OnPropertyChanged();
             }
         }
